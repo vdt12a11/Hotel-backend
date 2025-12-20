@@ -20,12 +20,16 @@ const bookingSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
+    status: {
+      type: String,
+      enum: ["booked", "checked_in", "checked_out"],
+      default: "booked",
+    },
     createdAt: {
       type: Date,
       default: () => new Date().toISOString(),
-    },
-  },
-  { timestamps: true } // tự động tạo createdAt và updatedAt
+    }
+  }
 );
 
 module.exports = mongoose.model('Booking', bookingSchema);

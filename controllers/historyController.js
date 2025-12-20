@@ -1,4 +1,4 @@
-const history = require('../model/history');
+
 const Booking = require('../model/booking');
 
 const getHistory = async (req, res) => {
@@ -19,9 +19,9 @@ const getHistory = async (req, res) => {
         "formData.email": 1,
         "formData.checkIn": 1,
         "formData.checkOut": 1,
-
         totalPrice: 1,
-        createdAt: 1
+        createdAt: 1,
+        status:1
       }).sort({ date: -1 }); // mới nhất trước
     console.log("Bookings:", bookings);
     const formatted = bookings.map(b => ({

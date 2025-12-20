@@ -2,7 +2,7 @@ const Room = require('../model/room');
 
 const getAllRoom = async (req, res) => {
     const rooms = await Room.find();
-    if (!rooms) return res.status(204).json({ 'message': 'No employees found.' });
+    if (!rooms) return res.status(204).json({ 'message': 'No room found.' });
     res.json(rooms);
 }
 
@@ -26,7 +26,7 @@ const createNewRoom = async (req, res) => {
 
 }
 const getRoom = async (req, res) => {
-    if (!req?.params?.id) return res.status(400).json({ 'message': 'Employee ID required.' });
+    if (!req?.params?.id) return res.status(400).json({ 'message': 'Room ID required.' });
 
     const room = await Room.findOne({ _id: req.params.id }).exec();
     if (!room) {
@@ -34,41 +34,7 @@ const getRoom = async (req, res) => {
     }
     res.json(room);
 }
-const updateEmployee = async (req, res) => {
-    if (!req?.body?.id) {
-        return res.status(400).json({ 'message': 'ID parameter is required.' });
-    }
 
-    const employee = await Employee.findOne({ _id: req.body.id }).exec();
-    if (!employee) {
-        return res.status(204).json({ "message": `No employee matches ID ${req.body.id}.` });
-    }
-    if (req.body?.firstname) employee.firstname = req.body.firstname;
-    if (req.body?.lastname) employee.lastname = req.body.lastname;
-    const result = await employee.save();
-    res.json(result);
-}
-
-const deleteEmployee = async (req, res) => {
-    if (!req?.body?.id) return res.status(400).json({ 'message': 'Employee ID required.' });
-
-    const employee = await Employee.findOne({ _id: req.body.id }).exec();
-    if (!employee) {
-        return res.status(204).json({ "message": `No employee matches ID ${req.body.id}.` });
-    }
-    const result = await employee.deleteOne(); //{ _id: req.body.id }
-    res.json(result);
-}
-
-const getEmployee = async (req, res) => {
-    if (!req?.params?.id) return res.status(400).json({ 'message': 'Employee ID required.' });
-
-    const employee = await Employee.findOne({ _id: req.params.id }).exec();
-    if (!employee) {
-        return res.status(204).json({ "message": `No employee matches ID ${req.params.id}.` });
-    }
-    res.json(employee);
-}
 
 module.exports = {
     getAllRoom,
