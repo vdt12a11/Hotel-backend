@@ -5,4 +5,5 @@ const bookingController = require('../controllers/bookingController');
 router.post('/', bookingController.handleBooking);
 router.patch('/:id/checkin', bookingController.checkInBooking);
 router.patch('/:id/checkout', bookingController.checkOutBooking);
+router.get('/', bookingController.getAllBookings);
 module.exports = router;

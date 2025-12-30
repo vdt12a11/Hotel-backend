@@ -12,7 +12,7 @@ try {
     // Tạo object booking
     const newBooking = await Booking.create({
         userID,
-        room,
+        room: room,
         formData,
         totalPrice,
         date:date || new Date().toISOString()
@@ -26,7 +26,14 @@ try {
     res.status(500).json({ message: err.message });
 }
 }
-
+const getAllBookings = async (req, res) => {
+  try {
+    const bookings = await Booking.find();
+    res.json(bookings);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 const checkInBooking = async (req, res) => {
   
   try {
@@ -88,4 +95,4 @@ const checkOutBooking = async (req, res) => {
 };
 
 
-module.exports = { handleBooking,checkInBooking,checkOutBooking };
+module.exports = { handleBooking,checkInBooking,checkOutBooking,getAllBookings };
